@@ -43,3 +43,12 @@ def quantile_outliers(df: pd.DataFrame) -> Tuple[pd.DataFrame, int]:
             pass
         
     return df_new.reset_index().drop('index', axis=1), (len(df) - len(df_new))
+
+
+def IQR_outliers(df: pd.DataFrame) -> Tuple[pd.DataFrame, int]:
+
+    Q1 = df.quantile(q=0.25)
+    Q3 = df.quantile(q=0.75)
+    IQR = Q1 - Q3
+
+    
