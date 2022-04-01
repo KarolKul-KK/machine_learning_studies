@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-def read_csv(filename):
+def read_csv(filename: str) -> pd.core.frame.DataFrame:
     '''Getting only numeric columns from file.'''
     df = pd.read_csv(f'{filename}.csv')
     cols = df.columns
@@ -16,4 +16,23 @@ def read_csv(filename):
 
     df_num = pd.read_csv(f'{filename}.csv', usecols=num_cols)
 
-    return df_num   
+    return df_num
+
+
+def dropping_missing_values(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+
+    return df.dropna()
+
+
+def mean_fillinf_values(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+
+    return df.fillna(df.mean())
+
+
+def knn_filling(df: pd.core.frame.DataFrame) -> np.ndarray:
+
+    impt = KNNImputer()
+    impt.fit(df)
+    impt_results = impt.transform(df)
+
+    return impt_results
