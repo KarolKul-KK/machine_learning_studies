@@ -21,14 +21,10 @@ def make_df_from_lists(lists: list) -> pd.DataFrame:
 
 def metrics(df: pd.DataFrame) -> pd.DataFrame:
 
-    df_mean = df.mean().round(2)
-    df_std = df.std(ddof=0).round(2)
-    df_var = df.var().round(2)
+    df = df.describe().round(2)
+    df = df.head(3)
 
-    df_final = pd.DataFrame([df_mean, df_std, df_var]).T
-    df_final.columns = ['Mean', 'Std', 'Var']
-
-    return df_final
+    return df
 
 
 def make_csv_from_df(df: pd.DataFrame, outpath: str) -> None:
@@ -36,9 +32,15 @@ def make_csv_from_df(df: pd.DataFrame, outpath: str) -> None:
     df.to_csv(os.path.join(outpath, 'final.csv'))
 
 
-output_path = '/Users/karolkul/Documents/GitHub/machine_learning_studies/machine_learning_studies'
-df = make_df_from_lists(lists)
-df_final = metrics(df)
-make_csv_from_df(df_final, output_path)
+def main():
+
+    output_path = '/Users/karolkul/Documents/GitHub/machine_learning_studies'
+    df = make_df_from_lists(lists)
+    df_final = metrics(df)
+    make_csv_from_df(df_final, output_path)
+
+
+if __name__ == '__main__':
+    main()
 
 
