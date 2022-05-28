@@ -1,4 +1,3 @@
-from nbformat import read
 import pandas as pd
 import numpy as np
 
@@ -8,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 
 
-def read_csv(filename: str) -> pd.core.frame.DataFrame:
+def read_csv(filename: str) -> pd.DataFrame:
     '''Getting only numeric columns from file.'''
     df = pd.read_csv(f'{filename}.csv')
     cols = df.columns
@@ -25,17 +24,17 @@ def read_csv(filename: str) -> pd.core.frame.DataFrame:
     return df_num
 
 
-def dropping_missing_values(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def dropping_missing_values(df: pd.DataFrame) -> pd.DataFrame:
 
     return df.dropna()
 
 
-def mean_filling_values(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def mean_filling_values(df: pd.DataFrame) -> pd.DataFrame:
 
     return df.fillna(df.mean())
 
 
-def knn_filling(df: pd.core.frame.DataFrame) -> np.ndarray:
+def knn_filling(df: pd.DataFrame) -> pd.DataFrame:
 
     columns = df.columns
     impt = KNNImputer()
@@ -45,7 +44,7 @@ def knn_filling(df: pd.core.frame.DataFrame) -> np.ndarray:
     return pd.DataFrame(impt_results, columns=columns)
 
 
-def data_split(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+def data_split(df: pd.DataFrame) -> pd.DataFrame:
 
     X_train, X_test, y_train, y_test = train_test_split(df.drop('Price', axis=1),
                                                         df['Price'],
@@ -56,7 +55,7 @@ def data_split(df: pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
     return X_train, X_test, y_train, y_test
 
 
-def score_dataset(X_train: pd.core.frame.DataFrame, X_test: pd.core.frame.DataFrame, y_train: pd.core.frame.DataFrame, y_test: pd.core.frame.DataFrame) -> np.float64:
+def score_dataset(X_train: pd.DataFrame, X_test: pd.DataFrame, y_train: pd.DataFrame, y_test: pd.DataFrame) -> np.float64:
 
     regr_model = LinearRegression()
     regr_model.fit(X_train, y_train)
@@ -76,8 +75,8 @@ def main() -> dict:
 
     for df in df_list:
         X_train, X_test, y_train, y_test = data_split(df)
-        mea = score_dataset(X_train, X_test, y_train, y_test)
-        print({'mea': mea})
+        mae = score_dataset(X_train, X_test, y_train, y_test)
+        print({'mae': mae})
 
 
 if __name__ == '__main__':

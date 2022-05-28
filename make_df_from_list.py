@@ -29,18 +29,16 @@ def metrics(df: pd.DataFrame) -> pd.DataFrame:
 
 def make_csv_from_df(df: pd.DataFrame, outpath: str) -> None:
 
-    df.to_csv(os.path.join(outpath, 'final.csv'))
+    df.to_csv(os.path.join(outpath, "final.csv"))
 
 
 def main():
 
-    output_path = '/Users/karolkul/Documents/GitHub/machine_learning_studies'
+    output_path = "/Users/karolkul/Documents/GitHub/machine_learning_studies"
     df = make_df_from_lists(lists)
     df_final = metrics(df)
     make_csv_from_df(df_final, output_path)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
-
