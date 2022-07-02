@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     X, y = wine_data.data, wine_data.target
 
-    kf = KFold(n_splits=10)
+    kf = StratifiedKFold(n_splits=10)
     kf.get_n_splits(X)
 
     score_list = []
