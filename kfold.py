@@ -24,3 +24,4 @@ if __name__ == "__main__":
         score_list.append(s)
         print("y_train_count:", np.bincount(y_train), "y_test_count:", np.bincount(y_test))
         print(10 * '*')
+        print(score_list)
